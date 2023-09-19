@@ -6,7 +6,9 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+  <link href="
+  https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
+  " rel="stylesheet">
   <!-- Bootstrap CSS v5.2.1 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
@@ -14,17 +16,102 @@
 </head>
 
 <body>
-  <header>
+  <header class="container bg-secondary text-white p-2">
     <!-- place navbar here -->
-    bs5-navbar
+    <div class="navbar navbar-expand-lg">
+      <div>Player: <span class="p-1" id="player">Guest</span> <button id="login-btn" type="button"
+          class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalLogin">Log in</button>
+        <button id="logout-btn" type="button" class="btn btn-primary d-none">Log out</button>
+      </div>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item px-2">Games: <span id="games">0</span></li>
+          <li class="nav-item px-2">Score: <span id="score">0</span></li>
+          <li class="nav-item px-2">Fails: <span id="fails">0</span></li>
+          <li class="nav-item px-2">Questions: <span id="questions">0</span></li>
+        </ul>
+      </div>
+    </div>
   </header>
-  <main>
-
+  <main class="container d-flex justify-content-center p-1">
   </main>
   <footer>
     <!-- place footer here -->
   </footer>
+
+  <!-- Logeo -->
+  <div class="modal fade" id="modalLogin" tabindex="-1" aria-labelledby="modalLoginLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalLoginLabel">Iniciar Sesión</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Formulario de inicio de sesión -->
+          <form id="login-form">
+            <div class="mb-3">
+              <label for="inputEmail" class="form-label">Correo Electrónico</label>
+              <input type="email" class="form-control" id="inputEmail" placeholder="usuario@example.com">
+            </div>
+            <div class="mb-3">
+              <label for="inputPassword" class="form-label">Contraseña</label>
+              <input type="password" class="form-control" id="inputPassword" placeholder="Contraseña">
+            </div>
+            <p class="text-center">¿No tienes una cuenta?<a href="#" data-bs-toggle="modal" data-bs-dismiss="modal"
+                data-bs-target="#modalRegister">Regístrate</a></p>
+            <button id="loginButton" data-id="login" type="submit" class="btn btn-primary"
+              data-bs-dismiss="modal">Iniciar Sesión</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Registro -->
+  <div class="modal fade" id="modalRegister" tabindex="-1" aria-labelledby="modalRegisterLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalRegisterLabel">Registro</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Formulario de registro -->
+          <form id="register-form">
+            <div class="mb-3">
+              <label for="inputName" class="form-label">Nombre de Usuario</label>
+              <input type="text" class="form-control" id="inputName" placeholder="Nombre de Usuario">
+            </div>
+            <div class="mb-3">
+              <label for="inputEmailRegister" class="form-label">Correo Electrónico</label>
+              <input type="email" class="form-control" id="inputEmailRegister" placeholder="usuario@example.com">
+            </div>
+            <div class="mb-3">
+              <label for="inputPasswordRegister" class="form-label">Contraseña</label>
+              <input type="password" class="form-control" id="inputPasswordRegister" placeholder="Contraseña">
+            </div>
+            <button data-id="register" type="submit" class="btn btn-primary"
+              data-bs-dismiss="modal">Registrarse</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <template id="question_template">
+    <div class="row flex-column justify-content-center align-items-center g-2 text-white fw-bold">
+      <div class="question col p-2 bg-info">Question</div>
+      <img src="image source" class="img-fluid p-2 border border-2 border-dark" alt="">
+      <ul class="options list-group col border border-2 border-dark p-2">
+      </ul>
+    </div>
+  </template>
+
   <!-- Bootstrap JavaScript Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.all.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
     integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
     </script>
@@ -32,7 +119,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
     integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
     </script>
-  <script type="module" src="./app.js"></script>
+  <script type="module" src="./js/app.js"></script>
 </body>
 
 </html>
